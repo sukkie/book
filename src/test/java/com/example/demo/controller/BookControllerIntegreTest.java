@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
+ * IoC필요.
  * 통합테스(모든 빈을 IoC에 올리고 테스트)
  * WebEnvironment.MOCK 테스트용 톰캣으로 테스트
  * WebEnvironment.RANDOM_PORT 실제 톰캣으로 테스트

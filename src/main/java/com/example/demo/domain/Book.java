@@ -14,6 +14,7 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Book {
 
     @Id //PK

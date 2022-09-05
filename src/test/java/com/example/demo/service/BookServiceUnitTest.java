@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
+ * IoC불필요.
  * 단위테스트(Service와 관련된 빈들만 메모리에 띄우면 됨)
  * BookRepository => 가짜 객체로 만들 수 있음.
  */
