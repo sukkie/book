@@ -1,10 +1,17 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.Book;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -24,7 +31,21 @@ public class BookControllerIntegreTest {
     private MockMvc mockMvc;
 
     @Test
-    public void save_테스트() {
-        System.out.println("--------");
+    public void save_테스트() throws Exception {
+        // given(테스트를 위한 준비)
+        Book book = new Book(null, "aaa", "bbb");
+        String content = new ObjectMapper().writeValueAsString(book);
+
+        // when(테스트 실행)
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/book")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content));
+
+        // then(검증)
+        resultActions
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("aaa"))
+                .andDo(MockMvcResultHandlers.print());
     }
 }
