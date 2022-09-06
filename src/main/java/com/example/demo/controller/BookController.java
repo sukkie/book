@@ -24,7 +24,7 @@ public class BookController {
     }
 
     @GetMapping("/book/{id}" )
-    public ResponseEntity<?> findAll(@PathVariable Long id) {
+    public ResponseEntity<?> findById(@PathVariable Long id) {
         return new ResponseEntity<>(bookService.한건가져오기(id), HttpStatus.OK);
     }
 

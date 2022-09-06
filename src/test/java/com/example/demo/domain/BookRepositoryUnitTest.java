@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,4 +19,15 @@ public class BookRepositoryUnitTest {
     @Autowired
     private BookRepository bookRepository;
 
+    @Test
+    public void 저장하기_테스트() {
+        // given
+        Book book = new Book(null, "aaa", "bbb");
+
+        // when
+        Book bookEntity = bookRepository.save(book);
+
+        // then
+        Assertions.assertEquals(book.getAuthor(), bookEntity.getAuthor());
+    }
 }
